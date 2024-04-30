@@ -1,6 +1,7 @@
 package com.example.infoo10;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,25 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
     private List<DataClass> dataList;
+    private boolean resizeItems;
 
-    public MyAdapter(Context context, List<DataClass> dataList){
+    public MyAdapter(Context context, List<DataClass> dataList, boolean resizeItems){
         this.context = context;
         this.dataList = dataList;
+        this.resizeItems = resizeItems;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+
+        if (resizeItems) {
+            int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+            int itemWidth = screenWidth / 2;  // Adjust this value as needed
+            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(itemWidth, RecyclerView.LayoutParams.WRAP_CONTENT);
+            view.setLayoutParams(layoutParams);
+        }
         return new MyViewHolder(view);
     }
 

@@ -67,7 +67,8 @@ public class ShortsFragment extends Fragment {
 
         loadMoviesFromAssets();  // Load movie data
 
-        adapter = new MyAdapter(getActivity(), dataList);
+        adapter = new MyAdapter(getActivity(), dataList, false); // Enable resizing
+
         recyclerView.setAdapter(adapter);
     }
 
