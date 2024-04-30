@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
 
         //coloring search hint
-        int color = ContextCompat.getColor(requireContext(), R.color.black);
+        int color = ContextCompat.getColor(requireContext(), R.color.white);
         searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(color);
 
@@ -81,12 +81,20 @@ public class HomeFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
-            for (int i = 0; i < 20; i++) {    //movies.length()
+            for (int i = 0; i < movies.length(); i++) {    //movies.length()
                 JSONObject movie = movies.getJSONObject(i);
                 String title = movie.getString("Title");
                 String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
                 String posterUrl = movie.getString("Poster");
-                dataList.add(new DataClass(title, rating, posterUrl));
+                String yearRelease = movie.getString("Year");
+                int year = Integer.parseInt(yearRelease);
+
+                if (year>=2018) {
+                    dataList.add(new DataClass(title, rating, posterUrl));
+
+                }
+
+//                dataList.add(new DataClass(title, rating, posterUrl));
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
