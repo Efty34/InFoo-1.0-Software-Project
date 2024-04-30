@@ -20,22 +20,48 @@
         app:searchHintIcon="@null"
         app:queryHint="Search..."
         android:textColorHint="@color/yellow"
-
         android:focusable="false"
         app:closeIcon="@drawable/baseline_clear_24"
         app:searchIcon="@drawable/baseline_search_24"
         android:background="@drawable/search_bkg"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="75dp"
+        android:layout_below="@id/search"
+        android:fillViewport="true">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        android:scrollbars="vertical"
-        android:layout_below="@id/search"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Recent Releases"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="#ffc107"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerView"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="75dp"
+                android:scrollbars="vertical"
+                android:layout_below="@id/textView"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

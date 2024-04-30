@@ -43,7 +43,7 @@ public class ShortsFragment extends Fragment {
 
 
         //coloring search hint
-        int color = ContextCompat.getColor(requireContext(), R.color.black);
+        int color = ContextCompat.getColor(requireContext(), R.color.white);
         searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(color);
 
