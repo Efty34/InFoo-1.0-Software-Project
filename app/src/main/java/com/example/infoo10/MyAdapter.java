@@ -1,12 +1,13 @@
 package com.example.infoo10;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -14,15 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
     private List<DataClass> dataList;
-
-    public void setSearchList(List<DataClass> dataSearchList){
-        this.dataList = dataSearchList;
-        notifyDataSetChanged();
-    }
 
     public MyAdapter(Context context, List<DataClass> dataList){
         this.context = context;
@@ -38,45 +33,32 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        holder.recImage.setImageResource(dataList.get(position).getDataImage());
-        holder.recTitle.setText(dataList.get(position).getDataTitle());
-        holder.recDesc.setText(dataList.get(position).getDataDesc());
-        holder.recLang.setText(dataList.get(position).getDataLang());
-
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Desc", dataList.get(holder.getAdapterPosition()).getDataDesc());
-
-                context.startActivity(intent);
-            }
-        });
-
+        DataClass movie = dataList.get(position);
+        holder.recTitle.setText(movie.getTitle());
+        holder.recDesc.setText(movie.getRating());
+        Picasso.get().load(movie.getPosterUrl()).into(holder.recImage); // Using Picasso to load images
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
-}
 
-class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView recImage;
+        TextView recTitle, recDesc;
 
-    ImageView recImage;
-    TextView recTitle, recDesc, recLang;
-    CardView recCard;
-
-    public MyViewHolder(@NonNull View itemView) {
-        super(itemView);
-
-        recImage = itemView.findViewById(R.id.recImage);
-        recTitle = itemView.findViewById(R.id.recTitle);
-        recDesc = itemView.findViewById(R.id.recDesc);
-        recLang = itemView.findViewById(R.id.recLang);
-        recCard = itemView.findViewById(R.id.recCard);
+        MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            recImage = itemView.findViewById(R.id.recImage);
+            recTitle = itemView.findViewById(R.id.recTitle);
+            recDesc = itemView.findViewById(R.id.recDesc);
+        }
     }
+
+    public void setSearchList(List<DataClass> dataSearchList) {
+        this.dataList = dataSearchList;
+        notifyDataSetChanged();
+    }
+
 }

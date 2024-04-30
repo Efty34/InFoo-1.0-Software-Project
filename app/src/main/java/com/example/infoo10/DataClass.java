@@ -1,31 +1,25 @@
 package com.example.infoo10;
+
 public class DataClass {
+    private String title;
+    private String rating;
+    private String posterUrl;
 
-    private String dataTitle;
-    private int dataDesc;
-    private String dataLang;
-    private int dataImage;
-
-    public String getDataTitle() {
-        return dataTitle;
+    public DataClass(String title, String rating, String posterUrl) {
+        this.title = title;
+        this.rating = rating;
+        this.posterUrl = posterUrl;
     }
 
-    public int getDataDesc() {
-        return dataDesc;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDataLang() {
-        return dataLang;
+    public String getRating() {
+        return rating;
     }
 
-    public int getDataImage() {
-        return dataImage;
-    }
-
-    public DataClass(String dataTitle, int dataDesc, String dataLang, int dataImage) {
-        this.dataTitle = dataTitle;
-        this.dataDesc = dataDesc;
-        this.dataLang = dataLang;
-        this.dataImage = dataImage;
+    public String getPosterUrl() {
+        return posterUrl;
     }
 }

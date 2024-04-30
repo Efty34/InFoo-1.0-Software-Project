@@ -37,6 +37,9 @@ android {
 
 dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
+    implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
 
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.appcompat:appcompat:1.5.1")

@@ -4,14 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class HomeFragment extends Fragment {
 
@@ -19,6 +28,9 @@ public class HomeFragment extends Fragment {
     List<DataClass> dataList;
     MyAdapter adapter;
     SearchView searchView;
+    EditText searchEditText;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +41,17 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         searchView = view.findViewById(R.id.search);
 
+
+        //coloring search hint
+        int color = ContextCompat.getColor(requireContext(), R.color.black);
+        searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchEditText.setHintTextColor(color);
+
+
+
+
+
+
         initializeRecyclerView();
         setupSearchView();
 
@@ -36,22 +59,38 @@ public class HomeFragment extends Fragment {
     }
 
     private void initializeRecyclerView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         dataList = new ArrayList<>();
 
-        addItemsToDataList();  // Adding items to the list
+
+
+        loadMoviesFromAssets();  // Load movie data
 
         adapter = new MyAdapter(getActivity(), dataList);
         recyclerView.setAdapter(adapter);
     }
 
-    private void addItemsToDataList() {
-        dataList.add(new DataClass("Camera", R.string.camera, "Java", R.drawable.camera_detail));
-        dataList.add(new DataClass("RecyclerView", R.string.recyclerview, "Kotlin", R.drawable.date_detail));
-        dataList.add(new DataClass("Date Picker", R.string.date, "Java", R.drawable.date_detail));
-        dataList.add(new DataClass("EditText", R.string.edit, "Kotlin", R.drawable.edit_detail));
-        dataList.add(new DataClass("Rating Bar", R.string.rating, "Java", R.drawable.rating_detail));
+    private void loadMoviesFromAssets() {
+        try {
+            InputStream inputStream = getContext().getAssets().open("movies.json");
+            Scanner scanner = new Scanner(inputStream);
+            StringBuilder builder = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                builder.append(scanner.nextLine());
+            }
+            JSONObject root = new JSONObject(builder.toString());
+            JSONArray movies = root.getJSONArray("movies");
+            for (int i = 0; i < 20; i++) {    //movies.length()
+                JSONObject movie = movies.getJSONObject(i);
+                String title = movie.getString("Title");
+                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
+                String posterUrl = movie.getString("Poster");
+                dataList.add(new DataClass(title, rating, posterUrl));
+            }
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupSearchView() {
@@ -70,14 +109,14 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void searchList(String text){
+    private void searchList(String text) {
         List<DataClass> dataSearchList = new ArrayList<>();
-        for (DataClass data : dataList){
-            if (data.getDataTitle().toLowerCase().contains(text.toLowerCase())) {
+        for (DataClass data : dataList) {
+            if (data.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 dataSearchList.add(data);
             }
         }
-        if (dataSearchList.isEmpty()){
+        if (dataSearchList.isEmpty()) {
             Toast.makeText(getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
         } else {
             adapter.setSearchList(dataSearchList);
