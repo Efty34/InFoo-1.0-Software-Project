@@ -8,16 +8,24 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import com.example.infoo10.databinding.ActivityMainBinding;
+import com.google.android.material.bottomappbar.BottomAppBar;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private BottomAppBar bottomAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        bottomAppBar = findViewById(R.id.bottomAppBar);
+        // Change the background color of the BottomAppBar
+        bottomAppBar.setBackgroundColor(getResources().getColor(R.color.darkpurple)); // Change "blue" to the desired color
+
 
         replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setBackground(null);

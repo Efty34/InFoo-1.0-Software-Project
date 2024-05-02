@@ -1,6 +1,7 @@
 package com.example.infoo10;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.recTitle.setText(movie.getTitle());
         holder.recDesc.setText(movie.getRating());
         Picasso.get().load(movie.getPosterUrl()).into(holder.recImage); // Using Picasso to load images
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("MovieData", movie);
+            context.startActivity(intent);
+        });
     }
 
     @Override

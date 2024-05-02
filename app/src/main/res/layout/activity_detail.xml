@@ -5,6 +5,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
+    android:background="@color/darkpurple"
 tools:context=".DetailActivity">
 
 <androidx.appcompat.widget.Toolbar
@@ -15,50 +16,98 @@ tools:context=".DetailActivity">
     app:navigationIcon="?attr/homeAsUpIndicator"
     app:title="Detail"
     app:titleTextColor="@android:color/white" />
-
-
-    <!-- Your existing TextView and ImageView -->
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".DetailActivity">
+        android:id="@+id/scrolldetail"
+        android:layout_below="@+id/toolbar"
+        android:fillViewport="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/detailTitle"
-            android:layout_marginTop="14dp"
-            android:text="Title"
-            android:textSize="24sp"
-            android:layout_gravity="center"
-            android:textColor="@color/lavender"
-            android:layout_marginBottom="12dp"/>
-
-        <ImageView
-            android:layout_width="400dp"
-            android:layout_height="200dp"
-            android:id="@+id/detailImage"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            android:src="@drawable/date_detail"
-            android:scaleType="centerCrop"/>
-
-        <TextView
+        <!-- Your existing TextView and ImageView -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Description"
-            android:padding="20dp"
-            android:layout_gravity="center"
-            android:textColor="@color/lavender"
-            android:textSize="18sp"
-            android:id="@+id/detailDesc"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".DetailActivity">
 
-    </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:id="@+id/detailImage"
+                android:padding="8dp"
+                android:layout_gravity="center"
+
+
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailTitle"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="title"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="rating"
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                android:id="@+id/detailRating"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="year"
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                android:id="@+id/detailYear"/>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="genre"-->
+<!--                android:padding="20dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/yellow"-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/detailGenre"/>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="plot"
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                android:id="@+id/detailPlot"/>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
 
 
 </RelativeLayout>

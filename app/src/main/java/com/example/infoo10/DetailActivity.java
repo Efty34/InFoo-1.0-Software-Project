@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailDesc, detailTitle;
+    TextView detailRating, detailTitle, detailYear, detailGenre, detailPlot;
     ImageView detailImage;
 
     @Override
@@ -23,17 +25,25 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        detailDesc = findViewById(R.id.detailDesc);
+        detailRating = findViewById(R.id.detailRating);
         detailTitle = findViewById(R.id.detailTitle);
         detailImage = findViewById(R.id.detailImage);
+        detailYear = findViewById(R.id.detailYear);
+//        detailGenre = findViewById(R.id.detailGenre);
+        detailPlot = findViewById(R.id.detailPlot);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            detailDesc.setText(bundle.getInt("Desc"));
-            detailImage.setImageResource(bundle.getInt("Image"));
-            detailTitle.setText(bundle.getString("Title"));
+        DataClass movie = getIntent().getParcelableExtra("MovieData");
+        if (movie != null) {
+            detailTitle.setText(movie.getTitle());
+            detailRating.setText(movie.getRating());
+            detailYear.setText(movie.getYear());
+//            detailGenre.setText(movie.getGenre());
+            detailPlot.setText(movie.getPlot());
+
+            Picasso.get().load(movie.getPosterUrl()).into(detailImage);
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

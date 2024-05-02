@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
                 int year = Integer.parseInt(yearRelease);
 
                 if (year>=2018) {
-                    dataList.add(new DataClass(title, rating, posterUrl));
+                    dataList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Plot")));
 
                 }
 
