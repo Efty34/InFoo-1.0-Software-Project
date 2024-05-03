@@ -92,7 +92,7 @@ public class ShortsFragment extends Fragment {
                 String ratingValue = ratingsArray.getJSONObject(0).getString("Value");
                 double rating = Double.parseDouble(ratingValue.split("/")[0]);
                 if (rating > 8.5) { // Filter movies with a rating higher than 9
-                    dataList.add(new DataClass(title, ratingValue, posterUrl, null, null));
+                    dataList.add(new DataClass(title, ratingValue, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
                 }
             }
         } catch (Exception e) {

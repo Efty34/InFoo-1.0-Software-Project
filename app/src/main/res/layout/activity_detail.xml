@@ -88,6 +88,53 @@ tools:context=".DetailActivity">
 <!--                android:textColor="@color/yellow"-->
 <!--                android:textSize="18sp"-->
 <!--                android:id="@+id/detailGenre"/>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:id="@+id/linearLayoutgenre"
+                android:paddingStart="16dp"
+                android:paddingEnd="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/genre"
+                >
+                <TextView
+                    android:id="@+id/genre1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+
+                    android:text=" genre "
+                    android:textSize="16sp"
+                    android:textColor="@color/white" />
+
+                <!-- Metascore Rating TextView -->
+                <TextView
+                    android:id="@+id/genre2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+
+                    android:text=" genre "
+                    android:textSize="16sp"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/genre3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+
+                    android:text=" genre "
+                    android:textSize="16sp"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

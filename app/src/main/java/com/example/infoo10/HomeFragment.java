@@ -46,9 +46,7 @@ public class HomeFragment extends Fragment {
         int color = ContextCompat.getColor(requireContext(), R.color.white);
         searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(color);
-
-
-
+        searchEditText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
 
 
 
@@ -62,8 +60,6 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         dataList = new ArrayList<>();
-
-
 
         loadMoviesFromAssets();  // Load movie data
 
@@ -91,7 +87,7 @@ public class HomeFragment extends Fragment {
                 int year = Integer.parseInt(yearRelease);
 
                 if (year>=2018) {
-                    dataList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Plot")));
+                    dataList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Genre"), movie.getString("Plot")));
 
                 }
 

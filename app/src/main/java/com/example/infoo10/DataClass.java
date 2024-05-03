@@ -8,15 +8,15 @@ public class DataClass implements Parcelable {
     private String rating;
     private String posterUrl;
     private String year;
-//    private String genre;
+    private String genre;
     private String plot;
 
-    public DataClass(String title, String rating, String posterUrl, String year, String plot) {
+    public DataClass(String title, String rating, String posterUrl, String year,String genre, String plot) {
         this.title = title;
         this.rating = rating;
         this.posterUrl = posterUrl;
         this.year = year;
-//        this.genre = genre;
+        this.genre = genre;
         this.plot = plot;
     }
 
@@ -25,7 +25,7 @@ public class DataClass implements Parcelable {
         rating = in.readString();
         posterUrl = in.readString();
         year = in.readString();
-//        genre = in.readString();
+        genre = in.readString();
         plot = in.readString();
 
     }
@@ -36,7 +36,7 @@ public class DataClass implements Parcelable {
         dest.writeString(rating);
         dest.writeString(posterUrl);
         dest.writeString(year);
-//        dest.writeString(genre);
+        dest.writeString(genre);
         dest.writeString(plot);
     }
 
@@ -69,6 +69,6 @@ public class DataClass implements Parcelable {
         return posterUrl;
     }
     public String getYear() { return year; }
-    //    public String getGenre() {  return genre; }
+    public String getGenre() {  return genre; }
     public String getPlot() {  return plot; }
 }
