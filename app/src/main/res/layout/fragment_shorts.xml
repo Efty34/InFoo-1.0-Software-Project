@@ -43,7 +43,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Recent Releases"
+                android:text="All Time Top"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="#ffc107"
                 android:textSize="18sp"

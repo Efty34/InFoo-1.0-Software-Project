@@ -88,19 +88,9 @@ public class DetailActivity extends AppCompatActivity {
                 genre3.setVisibility(View.GONE);
             }
 
-
-
-
-
-
-
-
-
-
             Picasso.get().load(movie.getPosterUrl()).into(detailImage);
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
