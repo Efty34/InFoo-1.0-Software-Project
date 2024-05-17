@@ -30,8 +30,6 @@ public class HomeFragment extends Fragment {
     SearchView searchView;
     EditText searchEditText;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,14 +39,11 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         searchView = view.findViewById(R.id.search);
 
-
         //coloring search hint
         int color = ContextCompat.getColor(requireContext(), R.color.white);
         searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(color);
         searchEditText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-
-
 
         initializeRecyclerView();
         setupSearchView();
@@ -76,9 +71,18 @@ public class HomeFragment extends Fragment {
             while (scanner.hasNextLine()) {
                 builder.append(scanner.nextLine());
             }
-            JSONObject root = new JSONObject(builder.toString());
+            dataList = parseMoviesJson(builder.toString());
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public List<DataClass> parseMoviesJson(String json) {
+        List<DataClass> moviesList = new ArrayList<>();
+        try {
+            JSONObject root = new JSONObject(json);
             JSONArray movies = root.getJSONArray("movies");
-            for (int i = 0; i < movies.length(); i++) {    //movies.length()
+            for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
                 String title = movie.getString("Title");
                 String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
@@ -86,16 +90,14 @@ public class HomeFragment extends Fragment {
                 String yearRelease = movie.getString("Year");
                 int year = Integer.parseInt(yearRelease);
 
-                if (year>=2018) {
-                    dataList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Genre"), movie.getString("Plot")));
-
+                if (year >= 2018) {
+                    moviesList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Genre"), movie.getString("Plot")));
                 }
-
-//                dataList.add(new DataClass(title, rating, posterUrl));
             }
         } catch (Exception e) {
-            Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
+        return moviesList;
     }
 
     private void setupSearchView() {
@@ -114,7 +116,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void searchList(String text) {
+    public void searchList(String text) {
         List<DataClass> dataSearchList = new ArrayList<>();
         for (DataClass data : dataList) {
             if (data.getTitle().toLowerCase().contains(text.toLowerCase())) {
