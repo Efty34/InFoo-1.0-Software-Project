@@ -48,8 +48,6 @@ public class SubscriptionFragment extends Fragment {
         recyclerView5 = view.findViewById(R.id.recyclerView5);
         recyclerView6 = view.findViewById(R.id.recyclerView6);
 
-
-
         searchView = view.findViewById(R.id.search);
 
         // Color the search hint
@@ -71,19 +69,15 @@ public class SubscriptionFragment extends Fragment {
         recyclerView5.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView6.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-
-//        dataList = new ArrayList<>();
         loadMoviesFromAssets1();
         loadMoviesFromAssets2();
         loadMoviesFromAssets3();
         loadMoviesFromAssets4();
         loadMoviesFromAssets5();
         loadMoviesFromAssets6();
-
-
     }
 
-    //Biography
+    // Biography
     private void loadMoviesFromAssets1() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -97,33 +91,25 @@ public class SubscriptionFragment extends Fragment {
 
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Biography")) {
-
-                            biographyList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        biographyList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), biographyList, true); // Enable resizing
-
         recyclerView1.setAdapter(adapter);
     }
 
-    //Crime
+    // Crime
     private void loadMoviesFromAssets2() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -134,35 +120,28 @@ public class SubscriptionFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
+
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Crime")) {
-
-                        crimeList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        crimeList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), crimeList, true); // Enable resizing
-
         recyclerView2.setAdapter(adapter);
     }
 
-    //Adventure
+    // Adventure
     private void loadMoviesFromAssets3() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -173,35 +152,28 @@ public class SubscriptionFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
+
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Adventure")) {
-
-                        adventureList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        adventureList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), adventureList, true); // Enable resizing
-
         recyclerView3.setAdapter(adapter);
     }
 
-    //Action
+    // Action
     private void loadMoviesFromAssets4() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -212,35 +184,28 @@ public class SubscriptionFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
+
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Action")) {
-
-                        actionList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        actionList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), actionList, true); // Enable resizing
-
         recyclerView4.setAdapter(adapter);
     }
 
-    //Romance
+    // Romance
     private void loadMoviesFromAssets5() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -251,35 +216,28 @@ public class SubscriptionFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
+
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Romance")) {
-
-                        romanceList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        romanceList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), romanceList, true); // Enable resizing
-
         recyclerView5.setAdapter(adapter);
     }
 
-    //Thriller
+    // Thriller
     private void loadMoviesFromAssets6() {
         try {
             InputStream inputStream = getContext().getAssets().open("movies.json");
@@ -290,36 +248,26 @@ public class SubscriptionFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
+
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
                 String genres = movie.getString("Genre");
                 String[] genreList = genres.split(", ");
                 for (String genre : genreList) {
                     if (genre.equals("Thriller")) {
-
-                        thrillerList.add(new DataClass(title, rating, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
-
+                        thrillerList.add(dataClass);
                     }
                 }
-
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error loading movies", Toast.LENGTH_SHORT).show();
         }
 
-
         adapter = new MyAdapter(getActivity(), thrillerList, true); // Enable resizing
-
         recyclerView6.setAdapter(adapter);
     }
-
-
-
 
     private void setupSearchView() {
         searchView.clearFocus();

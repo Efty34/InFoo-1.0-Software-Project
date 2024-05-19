@@ -84,14 +84,11 @@ public class HomeFragment extends Fragment {
             JSONArray movies = root.getJSONArray("movies");
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
-                String yearRelease = movie.getString("Year");
-                int year = Integer.parseInt(yearRelease);
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
+                int year = Integer.parseInt(dataClass.getYear());
 
                 if (year >= 2018) {
-                    moviesList.add(new DataClass(title, rating, posterUrl, yearRelease, movie.getString("Genre"), movie.getString("Plot")));
+                    moviesList.add(dataClass);
                 }
             }
         } catch (Exception e) {

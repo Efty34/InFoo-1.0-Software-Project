@@ -30,8 +30,6 @@ public class ShortsFragment extends Fragment {
     SearchView searchView;
     EditText searchEditText;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,16 +39,10 @@ public class ShortsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         searchView = view.findViewById(R.id.search);
 
-
-        //coloring search hint
+        // Coloring search hint
         int color = ContextCompat.getColor(requireContext(), R.color.white);
         searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(color);
-
-
-
-
-
 
         initializeRecyclerView();
         setupSearchView();
@@ -62,8 +54,6 @@ public class ShortsFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         dataList = new ArrayList<>();
-
-
 
         loadMoviesFromAssets();  // Load movie data
 
@@ -82,17 +72,17 @@ public class ShortsFragment extends Fragment {
             }
             JSONObject root = new JSONObject(builder.toString());
             JSONArray movies = root.getJSONArray("movies");
-            for (int i = 0; i < 20; i++) {    //movies.length()
+            for (int i = 0; i < 20; i++) {    // movies.length()
                 JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("Title");
-                //String rating = movie.getJSONArray("Ratings").getJSONObject(0).getString("Value");
-                String posterUrl = movie.getString("Poster");
+                // Using Factory pattern to create DataClass instances
+                DataClass dataClass = DataClassFactory.createFromJson(movie);
 
+                // Filter movies with a rating higher than 8.5
                 JSONArray ratingsArray = movie.getJSONArray("Ratings");
                 String ratingValue = ratingsArray.getJSONObject(0).getString("Value");
                 double rating = Double.parseDouble(ratingValue.split("/")[0]);
-                if (rating > 8.5) { // Filter movies with a rating higher than 9
-                    dataList.add(new DataClass(title, ratingValue, posterUrl, movie.getString("Year"), movie.getString("Genre"), movie.getString("Plot")));
+                if (rating > 8.5) {
+                    dataList.add(dataClass);
                 }
             }
         } catch (Exception e) {
