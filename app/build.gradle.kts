@@ -51,6 +51,7 @@ dependencies {
 
     testImplementation ("org.robolectric:robolectric:4.7.3")
     testImplementation ("androidx.test:core:1.4.0")
+    testImplementation ("org.json:json:20210307")
 }
 
 
