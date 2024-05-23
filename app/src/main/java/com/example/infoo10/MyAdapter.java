@@ -64,6 +64,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return dataList.size();
     }
 
+    public List<DataClass> getDataList() {
+        return dataList;
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView recImage;
         TextView recTitle, recDesc;
